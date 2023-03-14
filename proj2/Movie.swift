@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Movie {
+struct Movie : Decodable{
+    let id: Int
     let backdrop_path: URL
     let overview: String
     let popularity: Float
@@ -17,53 +18,57 @@ struct Movie {
     let vote_count: Int
 }
 
+struct MoviesResponse: Decodable {
+    let results: [Movie]
+}
 
-extension Movie {
-    /// An array of mock tracks
-    static var mockMovies: [Movie]  = [
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg")!,
-              overview: "Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death.  As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
-              popularity: 3501.282,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg")!,
-              title: "Black Panther: Wakanda Forever",
-              vote_average: 7.4,
-              vote_count: 3823),
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/b1Y8SUb12gPHCSSSNlbX4nB3IKy.jpg")!,
-              overview: "Puss in Boots discovers that his passion for adventure has taken its toll: He has burned through eight of his nine lives, leaving him with only one life left. Puss sets out on an epic journey to find the mythical Last Wish and restore his nine lives.",
-              popularity: 3278.515,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg")!,
-              title: "Puss in Boots: The Last Wish",
-              vote_average: 8.4,
-              vote_count: 4277),
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/9Rq14Eyrf7Tu1xk0Pl7VcNbNh1n.jpg")!,
-              overview: "After a heroic job of successfully landing his storm-damaged aircraft in a war zone, a fearless pilot finds himself between the agendas of multiple militias planning to take the plane and its passengers hostage.",
-              popularity: 2618.646,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/qi9r5xBgcc9KTxlOLjssEbDgO0J.jpg")!,
-              title: "Plane",
-              vote_average: 6.9,
-              vote_count: 770),
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/k4V6EvpcOsu8CX10JD0H53lFXLq.jpg")!,
-              overview: "Erstwhile Special Forces operative Doc Alexander is asked to broker a truce with the Mexican drug cartel in secrecy. When Oklahoma Governor Richard Jeffs celebrates the execution of a high-ranking cartel member on TV, his Chief of Staff and Doc inform him about the peace he just ended. But it’s too late, as Cuco, the cartel’s hatchet man, has set his vengeful sights on Doc’s daughter Dixie.",
-              popularity: 2015.068,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/cmWTZj9zzT9KFt3XyL0gssL7Ig8.jpg")!,
-              title: "Little Dixie",
-              vote_average: 6.4,
-              vote_count: 46),
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/A2avUoNFstnBhAnHiogXQs4c9Bt.jpg")!,
-              overview: "Valeria's joy at becoming a first-time mother is quickly taken away when she's cursed by a sinister entity. As danger closes in, she's forced deeper into a chilling world of dark magic that threatens to consume her.",
-              popularity: 1896.806,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/7NhG3NClQ1xrc3kEwTiwFht5Y3L.jpg")!,
-              title: "Huesera: The Bone Woman",
-              vote_average: 6.7,
-              vote_count: 65),
-        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/dlrWhn0G3AtxYUx2D9P2bmzcsvF.jpg")!,
-              overview: "A brilliant toy company roboticist uses artificial intelligence to develop M3GAN, a life-like doll programmed to emotionally bond with her newly orphaned niece. But when the doll's programming works too well, she becomes overprotective of her new friend with terrifying results.",
-              popularity: 1731.622,
-              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg")!,
-              title: "M3GAN",
-              vote_average: 7.5,
-              vote_count: 1891),
-    ]
+
+//extension Movie {
+//    /// An array of mock tracks
+//    static var mockMovies: [Movie]  = [
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg")!,
+//              overview: "Queen Ramonda, Shuri, M’Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers in the wake of King T’Challa’s death.  As the Wakandans strive to embrace their next chapter, the heroes must band together with the help of War Dog Nakia and Everett Ross and forge a new path for the kingdom of Wakanda.",
+//              popularity: 3501.282,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg")!,
+//              title: "Black Panther: Wakanda Forever",
+//              vote_average: 7.4,
+//              vote_count: 3823),
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/b1Y8SUb12gPHCSSSNlbX4nB3IKy.jpg")!,
+//              overview: "Puss in Boots discovers that his passion for adventure has taken its toll: He has burned through eight of his nine lives, leaving him with only one life left. Puss sets out on an epic journey to find the mythical Last Wish and restore his nine lives.",
+//              popularity: 3278.515,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg")!,
+//              title: "Puss in Boots: The Last Wish",
+//              vote_average: 8.4,
+//              vote_count: 4277),
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/9Rq14Eyrf7Tu1xk0Pl7VcNbNh1n.jpg")!,
+//              overview: "After a heroic job of successfully landing his storm-damaged aircraft in a war zone, a fearless pilot finds himself between the agendas of multiple militias planning to take the plane and its passengers hostage.",
+//              popularity: 2618.646,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/qi9r5xBgcc9KTxlOLjssEbDgO0J.jpg")!,
+//              title: "Plane",
+//              vote_average: 6.9,
+//              vote_count: 770),
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/k4V6EvpcOsu8CX10JD0H53lFXLq.jpg")!,
+//              overview: "Erstwhile Special Forces operative Doc Alexander is asked to broker a truce with the Mexican drug cartel in secrecy. When Oklahoma Governor Richard Jeffs celebrates the execution of a high-ranking cartel member on TV, his Chief of Staff and Doc inform him about the peace he just ended. But it’s too late, as Cuco, the cartel’s hatchet man, has set his vengeful sights on Doc’s daughter Dixie.",
+//              popularity: 2015.068,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/cmWTZj9zzT9KFt3XyL0gssL7Ig8.jpg")!,
+//              title: "Little Dixie",
+//              vote_average: 6.4,
+//              vote_count: 46),
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/A2avUoNFstnBhAnHiogXQs4c9Bt.jpg")!,
+//              overview: "Valeria's joy at becoming a first-time mother is quickly taken away when she's cursed by a sinister entity. As danger closes in, she's forced deeper into a chilling world of dark magic that threatens to consume her.",
+//              popularity: 1896.806,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/7NhG3NClQ1xrc3kEwTiwFht5Y3L.jpg")!,
+//              title: "Huesera: The Bone Woman",
+//              vote_average: 6.7,
+//              vote_count: 65),
+//        Movie(backdrop_path: URL(string:"https://image.tmdb.org/t/p/w500/dlrWhn0G3AtxYUx2D9P2bmzcsvF.jpg")!,
+//              overview: "A brilliant toy company roboticist uses artificial intelligence to develop M3GAN, a life-like doll programmed to emotionally bond with her newly orphaned niece. But when the doll's programming works too well, she becomes overprotective of her new friend with terrifying results.",
+//              popularity: 1731.622,
+//              poster_path: URL(string:"https://image.tmdb.org/t/p/w500/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg")!,
+//              title: "M3GAN",
+//              vote_average: 7.5,
+//              vote_count: 1891),
+//    ]
     //              {
     //                  "adult": false,
     //                  "backdrop_path": "/26YLjaC1udGEmSvlM1P5eBGWO5h.jpg",
@@ -349,4 +354,4 @@ extension Movie {
     
     // We can now access this array of mock tracks anywhere like this:
     // let tracks = Tracks.mockTracks
-}
+//}
