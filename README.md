@@ -1,4 +1,4 @@
-# Project 2 - MovieLib
+# Project 3 - MovieLib
 
 Submitted by: Chongjian Tang
 
@@ -10,16 +10,14 @@ Time spent: 5 hours spent in total
 
 The following **required** functionality is completed:
 
-- [x] Users are able to see a customized app icon and launch screen
-- [x] Your app should work for any screen size and orientation using AutoLayout constraints
-- [x] Displays at least 5 different movies in a table view
-- [x] Can tap into detail view of movie with a full description, backdrop image, and title
+- [x] Implement network call and table view to display a list of movies currently playing (title, description, image)
+- [x] App has a collection view with the same list of movies
+- [x] Uses a tab bar controller to switch between collection view and table view screens
  
 The following **optional** features are implemented:
 
-- [ ] Unique UI changes, such as background, font/color changes, etc.
-- [ ] User implements a collection view
-- [ ] User implemenets tab bar controller with at least two screens
+- [ ] Make an additional network call to another end-point.	
+- [ ] Allow users to scroll when context items are off-screen (table view implemention)
 
 The following **additional** features are implemented:
 
@@ -29,10 +27,10 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='proj2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='proj3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with Kap
+GIF created with Kap.
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
@@ -40,11 +38,11 @@ GIF created with Kap
 
 ## Notes
 
-Still not good at autolayout
+I tried see similar movies but it will return missing-pictured json data. I don't how to deal with it. So I give it up.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2023 Chongjian Tang
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
